@@ -14,7 +14,6 @@ build:
 .PHONY: rendered-manifest.yaml
 rendered-manifest.yaml:
 	helm template \
-	    --name cert-manager-webhook-dyndns \
-        --set image.repository=$(IMAGE_NAME) \
-        --set image.tag=$(IMAGE_TAG) \
-        deploy/cert-manager-webhook-dyndns > "$(OUT)/rendered-manifest.yaml"
+		cert-manager-webhook-dyndns \
+		--set image.repository=$(IMAGE_NAME),image.tag=$(IMAGE_TAG) \
+		deploy/cert-manager-webhook-dyndns > "$(OUT)/rendered-manifest.yaml"
