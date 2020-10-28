@@ -34,6 +34,8 @@ jobs:
       displayName: "Push image"
       inputs:
         containerRegistry: 'novos-produtos-sre-team-front'
-        tags: $(Build.BuildId)
+        tags: |
+          $(Build.BuildId)
+          latest
         repository: '$(DockerImageName)'
         command: 'push'
