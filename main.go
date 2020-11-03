@@ -169,7 +169,7 @@ func (c *dynDNSProviderSolver) createRecord(cfg *dynDNSProviderConfig, ch *v1alp
 		return err
 	}
 
-	commit(c, cfg, ch)
+	commit(c, cfg, ch, dynClient)
 
 	klog.V(4).Info("sleeping for 1.3 seconds")
 	time.Sleep(1300 * time.Millisecond)
@@ -214,7 +214,7 @@ func (c *dynDNSProviderSolver) CleanUp(ch *v1alpha1.ChallengeRequest) error {
 		return err
 	}
 
-	commit(c, &cfg, ch)
+	commit(c, &cfg, ch, dynClient)
 
 	return nil
 }
@@ -248,7 +248,7 @@ func loadConfig(cfgJSON *extapi.JSON) (dynDNSProviderConfig, error) {
 }
 
 // commit commits all pending changes. It will always attempt to commit, if there are no
-func commit(c *dynDNSProviderSolver, cfg *dynDNSProviderConfig, ch *v1alpha1.ChallengeRequest) error {
+func commit(c *dynDNSProviderSolver, cfg *dynDNSProviderConfig, ch *v1alpha1.ChallengeRequest, dynClient *dynect.Client) error {
 	klog.Infof("Committing changes")
 	// extra call if in debug mode to fetch pending changes
 	hostName, err := os.Hostname()
@@ -272,11 +272,7 @@ func commit(c *dynDNSProviderSolver, cfg *dynDNSProviderConfig, ch *v1alpha1.Cha
 	klog.Infof("Committing changes for zone %s: %+v", cfg.ZoneName, errorOrValue(err, &response))
 
 	link := fmt.Sprintf("Zone/%s/", cfg.ZoneName)
-	dynClient, err := c.dynClient(cfg, ch.ResourceNamespace)
-	if err != nil {
-		klog.Errorf("Error creating dynClient: %v", err)
-		return err
-	}
+
 	err = dynClient.Do("PUT", link, &zonePublish, &response)
 	klog.Infof("Creating record %s: %+v,", link, errorOrValue(err, &response))
 	if err != nil {
