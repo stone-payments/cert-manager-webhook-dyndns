@@ -21,7 +21,7 @@ import (
 )
 
 var GroupName = os.Getenv("GROUP_NAME")
-var RecordTTL = os.Getenv("RecordTTL")
+var RecordTTL = os.Getenv("RECORD_TTL")
 
 func main() {
 	if GroupName == "" {
