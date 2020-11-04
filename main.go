@@ -21,12 +21,15 @@ import (
 )
 
 var GroupName = os.Getenv("GROUP_NAME")
+var RecordTTL = os.Getenv("RecordTTL")
 
 func main() {
 	if GroupName == "" {
 		panic("GROUP_NAME must be specified")
 	}
-
+	if RecordTTL == "" {
+		panic("The DNS Record TTL must be specified")
+	}
 	// This will register our custom DNS provider with the webhook serving
 	// library, making it available as an API under the provided GroupName.
 	cmd.RunWebhookServer(GroupName,
@@ -152,7 +155,7 @@ func (c *dynDNSProviderSolver) createRecord(cfg *dynDNSProviderConfig, ch *v1alp
 	recordData := dynect.DataBlock{}
 	recordData.TxtData = ch.Key
 	record := dynect.RecordRequest{
-		TTL:   "60",
+		TTL:   RecordTTL,
 		RData: recordData,
 	}
 
