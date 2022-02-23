@@ -27,7 +27,7 @@ jobs:
         containerRegistry: 'novos-produtos-sre-team-front'
         repository: '$(DockerImageName)'
         command: 'build'
-        Dockerfile: '**/Dockerfile'
+        Dockerfile: 'Dockerfile'
         tags: $(Build.BuildId)
     - task: Docker@2
       displayName: "Build and Push image"
@@ -36,7 +36,7 @@ jobs:
         containerRegistry: 'novos-produtos-sre-team-front'
         repository: '$(DockerImageName)'
         command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
+        Dockerfile: 'Dockerfile'
         tags: |
           $(Build.BuildId)
           latest
