@@ -1,5 +1,5 @@
 pool:
-  name: Client Automation Docker
+  name: Self-Hosted Ubuntu 1604
 
 trigger:
   branches:
