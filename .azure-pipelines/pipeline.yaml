@@ -1,5 +1,5 @@
 pool:
-  name: gcp-stone-foundation-agents
+  name: front-gcp-functions-non-prod-agents
 
 trigger:
   branches:
