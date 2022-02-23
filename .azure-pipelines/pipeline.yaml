@@ -9,8 +9,8 @@ trigger:
     include:
     - '*'
     exclude:
-    - .azure-pipelines/*
-    - .github/*
+    - .azure-pipelines/
+    - .github/
 
 pr:
   - master
