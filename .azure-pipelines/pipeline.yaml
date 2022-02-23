@@ -1,13 +1,19 @@
+pool:
+  name: Azure Pipelines
+
+trigger:
+  branches:
+    include:
+      - master
+  paths:
+    include:
+    - '*'
+    exclude:
+    - .azure-pipelines/
+    - .github/
+
 pr:
   - master
-  - develop
-  
-trigger:
-  - master
-  - develop
-
-pool:
-  name: Hosted Ubuntu 1604
 
 variables:
   ProjectID: "spqlr1x2iywwy3df3ifsx84mol83c2"
@@ -21,14 +27,22 @@ jobs:
       inputs:
         containerRegistry: 'novos-produtos-sre-team-front'
         command: 'login'
-
+    - task: Docker@2
+      displayName: "Build image"
+      inputs:
+        containerRegistry: 'novos-produtos-sre-team-front'
+        repository: '$(DockerImageName)'
+        command: 'build'
+        Dockerfile: './Dockerfile'
+        tags: $(Build.BuildId)
     - task: Docker@2
       displayName: "Build and Push image"
+      condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
       inputs:
         containerRegistry: 'novos-produtos-sre-team-front'
         repository: '$(DockerImageName)'
         command: 'buildAndPush'
-        Dockerfile: '**/Dockerfile'
+        Dockerfile: './Dockerfile'
         tags: |
           $(Build.BuildId)
           latest
