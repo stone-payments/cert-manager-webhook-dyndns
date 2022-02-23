@@ -1,5 +1,5 @@
 pool:
-  name: Self-Hosted Ubuntu 1604
+  name: Azure Pipelines
 
 trigger:
   branches:
