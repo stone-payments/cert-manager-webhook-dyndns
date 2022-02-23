@@ -1,18 +1,14 @@
 pool:
   name: gcp-stone-foundation-agents
-
 trigger:
   branches:
     include:
       - master
-
 pr:
   - master
-
 variables:
   ProjectID: "spqlr1x2iywwy3df3ifsx84mol83c2"
   DockerImageName: "$(ProjectID)/cert-manager-webhook-dyndns"
-
 jobs:
   - job: DockerBuild
     steps:
