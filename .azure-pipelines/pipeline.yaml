@@ -5,6 +5,12 @@ trigger:
   branches:
     include:
       - master
+  paths:
+    include:
+    - '*'
+    exclude:
+    - .azure-pipelines/*
+    - .github/*
 
 pr:
   - master
