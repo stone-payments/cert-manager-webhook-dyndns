@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"os"
 	"time"
-	"io/fs"
+	//"io/fs"
 
 	extapi "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
 	"k8s.io/client-go/kubernetes"
