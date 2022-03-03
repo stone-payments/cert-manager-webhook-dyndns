@@ -1,11 +1,11 @@
-module github.com/jetstack/cert-manager-webhook-example
+module github.com/cert-manager/cert-manager-webhook-example
 
 go 1.12
 
 require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible // indirect
 	github.com/imdario/mergo v0.3.7 // indirect
-	github.com/jetstack/cert-manager v0.8.0-alpha.0
+	github.com/cert-manager/cert-manager v0.8.0-alpha.0
 	github.com/nesv/go-dynect v0.6.0
 	golang.org/x/oauth2 v0.0.0-20190402181905-9f3314589c9a // indirect
 	golang.org/x/time v0.0.0-20190308202827-9d24e82272b4 // indirect
