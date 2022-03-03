@@ -11,7 +11,7 @@ require (
 	golang.org/x/time v0.0.0-20190308202827-9d24e82272b4 // indirect
 	k8s.io/apiextensions-apiserver v0.23.1
 	k8s.io/apimachinery v0.0.0-20190413052414-40a3f73b0fa2
-	k8s.io/client-go v0.23.1+incompatible
+	k8s.io/client-go v0.23.1
 	k8s.io/klog v0.2.0
 )
 
